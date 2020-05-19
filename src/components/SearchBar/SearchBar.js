@@ -1,5 +1,6 @@
 import React from 'react';
 import './SearchBar.css';
+let pressed = false;
 
 class SearchBar extends React.Component {
   constructor(props) {
@@ -32,8 +33,10 @@ class SearchBar extends React.Component {
 
   handleSortByChange(sortByOption) {
     this.setState({sortBy: sortByOption});
+    if(pressed) {
     this.props.searchYelp(this.state.term, this.state.location, sortByOption);
   }
+}
 
   handleTermChange(event) {
     this.setState({term: event.target.value});
@@ -45,7 +48,7 @@ class SearchBar extends React.Component {
 
   handleSearch(event) {
     this.props.searchYelp(this.state.term, this.state.location, this.state.sortBy);
-
+    pressed = true;
     event.preventDefault();
   }
 
